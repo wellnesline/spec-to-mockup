@@ -1,0 +1,123 @@
+# synthetic sample / 合成データ: screens.yaml のサンプル (架空の「Example Studio」)。実在の製品・画面とは無関係。
+# スキーマだけを示す最小例。実際の画面定義に差し替えて使う。
+schema_version: 1
+# scope_sub_nav: scope ごとの sub-navigation の単一定義 (items の id は screens[].id と一致させる)。
+scope_sub_nav:
+  per_project:
+    placement: top_tabs
+    items:
+    - id: settings-general
+      label: 一般
+    - id: settings-members
+      label: メンバー
+screens:
+- id: dashboard-kpi
+  name: ダッシュボード
+  parent:
+  scope: global
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: projects-list, label: プロジェクト一覧へ, style: solid}
+  - {to: asset-library, label: ライブラリ, style: dashed}
+  nav_visible_in_sidebar: true
+  parent_chain: []
+  breadcrumb_label: ダッシュボード
+- id: account-settings
+  name: アカウント設定
+  parent:
+  scope: global
+  position: {hint_row: 0, hint_col: 1}
+  image:
+  status: missing
+  edges:
+  - {to: login, label: 認証切れ時, style: dashed}
+  nav_visible_in_sidebar: false
+  parent_chain: []
+  breadcrumb_label: アカウント
+- id: projects-list
+  name: プロジェクト一覧
+  parent:
+  scope: project
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: project-detail, label: 詳細, style: solid}
+  nav_visible_in_sidebar: true
+  parent_chain: []
+  breadcrumb_label: プロジェクト
+- id: project-detail
+  name: プロジェクト詳細
+  parent: projects-list
+  scope: project
+  position: {hint_row: 0, hint_col: 1}
+  image:
+  status: missing
+  edges:
+  - {to: settings-general, label: 設定, style: solid}
+  - {to: item-editor, label: 編集, style: solid}
+  nav_visible_in_sidebar: true
+  parent_chain: [projects-list]
+  breadcrumb_label: サンプルプロジェクト
+- id: settings-general
+  name: 一般設定
+  parent: project-detail
+  scope: per_project
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: settings-members, label: メンバー, style: solid}
+  nav_visible_in_sidebar: false
+  parent_chain: [projects-list, project-detail]
+  breadcrumb_label: 一般
+- id: settings-members
+  name: メンバー設定
+  parent: project-detail
+  scope: per_project
+  position: {hint_row: 0, hint_col: 1}
+  image:
+  status: missing
+  edges:
+  - {to: settings-general, label: 一般, style: solid}
+  nav_visible_in_sidebar: false
+  parent_chain: [projects-list, project-detail]
+  breadcrumb_label: メンバー
+- id: item-editor
+  name: アイテム編集
+  parent: project-detail
+  scope: per_item
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: project-detail, label: 戻る, style: solid}
+  nav_visible_in_sidebar: false
+  parent_chain: [projects-list, project-detail]
+  breadcrumb_label: サンプルアイテム
+- id: asset-library
+  name: アセットライブラリ
+  parent:
+  scope: global_utility
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: dashboard-kpi, label: 戻る, style: solid}
+  nav_visible_in_sidebar: true
+  parent_chain: []
+  breadcrumb_label: ライブラリ
+- id: login
+  name: ログイン
+  parent:
+  scope: error
+  position: {hint_row: 0, hint_col: 0}
+  image:
+  status: missing
+  edges:
+  - {to: dashboard-kpi, label: 成功, style: solid}
+  nav_visible_in_sidebar: false
+  parent_chain: []
+  breadcrumb_label: ログイン
